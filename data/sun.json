@@ -1,0 +1,18 @@
+{
+  "name": "Sun",
+  "position": [0.0,0.0],
+  "static": true,
+  "mass": 333054
+},
+{
+  "name": "Earth",
+  "position": [0.0,0.0],
+  "static": false,
+  "mass": 1,
+},
+{
+  "name": "Moon",
+  "position": [0.0,0.0],
+  "static": false,
+  "mass": 0.16,
+},

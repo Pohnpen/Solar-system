@@ -18,7 +18,7 @@ class Vector():
         x, y = self.x * self.scalar, self.y * self.scalar
         return Vector(x, y)
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     a = Vector(0, 0)
     b = Vector(1, 1)
     c = a+b
