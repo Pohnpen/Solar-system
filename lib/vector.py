@@ -18,7 +18,12 @@ class Vector():
         x, y = self.x * self.scalar, self.y * self.scalar
         return Vector(x, y)
 
-if __name__ = "__main__":
+    def distance(self, other):
+        # distance return as a float
+        distance = ((abs(self.x - other.x))**2 + (abs(self.y - other.y))**2)**0.5
+        return distance
+
+if __name__ == "__main__":
     a = Vector(0, 0)
     b = Vector(1, 1)
     c = a+b

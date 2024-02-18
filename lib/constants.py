@@ -1,0 +1,1 @@
+GRAVITATIONAL_CONSTANT = 6.674 * 10**-11 # N m**2 / kg**2
