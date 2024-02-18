@@ -23,6 +23,11 @@ class Vector():
         distance = ((abs(self.x - other.x))**2 + (abs(self.y - other.y))**2)**0.5
         return distance
 
+    def displacement(self, other):
+        # displacement return as an intiger
+        displacement = abs(self.x - other.x), abs(self.y - other.y) # (2.2, 4.3)
+        return Vector(displacement[0], displacement[1])
+
 if __name__ == "__main__":
     a = Vector(0, 0)
     b = Vector(1, 1)
