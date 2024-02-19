@@ -1,18 +1,18 @@
 # Orbit of the object in Solar system
 
-import math
-import pi
+from math import pi
 from vector import Vector
+from constants import GRAVITATIONAL_CONSTANT
 
 class Orbit():
     standardd_radian = 0.0
 
-    def __init__(self,  center: Vector, distance: float, velocity: float):
+    def __init__(self,  center: Vector, distance: float, period: float):
         self.center = center
-        self.distance = distance(
-        self.velocity = velocity # radians per time (1 time) rad/hour
+        self.distance = distance
+        self.period = period # radians per time (1 time) rad/hour
 
-    def position_at(self, time=0.0):
+    def position_at(self, period=0.0*pi):
         # return the Vector position on the orbital plane at time
         start = self.center * self.distance
         return
