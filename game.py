@@ -15,7 +15,11 @@ pygame.display.set_caption("Solar System Viewer")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (225, 225, 0)
+
+# Define constants
+# Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
+
 # Main loop
 running = True
 while running:
@@ -26,8 +30,6 @@ while running:
     # Fill the background
     screen.fill(BLACK)
 
-    # Draw a circle in the center of the window
-    # center = (window_size[0] // 2, window_size[1] // 2)  # Calculate the center of the window
     # pygame.draw.circle(screen, WHITE, center, 50)  # Draw circle with radius 50
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
 
