@@ -34,7 +34,8 @@ CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
-# TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
+mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.387*PX_PER_AU, period=88/365)
+venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.723*PX_PER_AU, period=225/365)
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position, distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.524*PX_PER_AU, period=1.88)
