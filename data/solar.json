@@ -1,0 +1,28 @@
+{
+  "name": "Sun",
+  "sprite": [0,255,0],
+  "barycenter": [0.0,0.0],
+  "static": true, // No orbit
+  "radius": 109.2, // Earth Radii
+  "mass": 333054.25, // Earth Mass
+},
+{
+  "name": "Earth",
+  "sprite": [0,0,255],
+  "barycenter": "Sun", // system center
+  "static": false,
+  "apsis": 1.0, // AU from system center
+  "orbital_period": 1.0 // Earth Years
+  "radius": 1.0, // Earth Radii
+  "mass": 1.0, // Earth Mass
+},
+{
+  "name": "Moon",
+  "sprite": [125,125,125],
+  "barycenter": "Earth",
+  "static": false,
+  "apsis": 0.0025695552897999907, // AU
+  "orbital_period": 0.0747945205479452 // Earth Years
+  "radius": 0.2727, // Earth Radii
+  "mass": 0.0123, // Earth Mass 
+},
