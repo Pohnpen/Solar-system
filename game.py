@@ -9,7 +9,7 @@ pygame.init()
 # Set up the display
 window_size = (1000, 1000)  # Width and height of the window
 screen = pygame.display.set_mode(window_size)
-pygame.display.set_caption("Solar system viewer")
+pygame.display.set_caption("Solar System Viewer")
 
 # Define colors
 BLACK = (0, 0, 0)
