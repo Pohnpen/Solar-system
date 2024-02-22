@@ -16,11 +16,13 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (225, 225, 0)
 BLUE = (0, 0, 225)
+GREY = (128, 128, 128)
 
 # Define constants
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
+BOTTOM_RIGHT = (1000, 1000)
 
 # Main loop
 running = True
@@ -34,9 +36,9 @@ while running:
 
     # TODO: Set the Sun back to 50 and the Earth to 10 radius
     # 1 Sun's radius = 0.0046524726 AU
-    pygame.draw.circle(screen, YELLOW, CENTER, 0.0046524726)
-
+    pygame.draw.circle(screen, YELLOW, CENTER, 50)
     pygame.draw.circle(screen, BLUE, LEFT_TOP, 10)
+    pygame.draw.circle(screen, GREY, BOTTOM_RIGHT, 5)
 
     # TODO: Draw a GREY circle at the bottom-right coordinate of the screen.
 
