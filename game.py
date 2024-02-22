@@ -12,9 +12,9 @@ from lib.vector import Vector
 pygame.init()
 infoObject = pygame.display.Info()
 screen_width, screen_height = infoObject.current_w, infoObject.current_h
+window_size = (screen_width, screen_height)  # Width and height of the window
 # Set up the display in fullscreen mode
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
-
+screen = pygame.display.set_mode((screen_width, screen_height))#, pygame.FULLSCREEN)
 pygame.display.set_caption("Solar System Viewer")
 
 # Define colors
@@ -23,6 +23,7 @@ WHITE = (255, 255, 255)
 YELLOW = (225, 225, 0)
 BLUE = (0, 0, 225)
 GREY = (128, 128, 128)
+RED = (255,0,0)
 
 
 # Define constants
@@ -65,7 +66,7 @@ while running:
     # MARS DISPLAY
     mars.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.center.tuple, mars.distance, width=1)
-    pygame.draw.circle(screen, BLUE, mars.orbital_position.tuple, 5)
+    pygame.draw.circle(screen, RED, mars.orbital_position.tuple, 5)
 
     # Update the display
     pygame.display.flip()
