@@ -20,7 +20,7 @@ BLUE = (0, 0, 225)
 # Define constants
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
-LEFT_TOP = window_size(0, 0)
+LEFT_TOP = (0, 0)
 
 # Main loop
 running = True
