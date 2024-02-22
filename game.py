@@ -10,10 +10,11 @@ from lib.vector import Vector
 
 # Initialize Pygame
 pygame.init()
+infoObject = pygame.display.Info()
+screen_width, screen_height = infoObject.current_w, infoObject.current_h
+# Set up the display in fullscreen mode
+screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
 
-# Set up the display
-window_size = (1000, 1000)  # Width and height of the window
-screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
 
 # Define colors
@@ -49,7 +50,6 @@ while running:
 
     # SUN DISPLAY
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
-
 
     # EARTH DISPLAY
     earth.move(TIME_FACTOR)
