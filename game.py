@@ -40,7 +40,9 @@ while running:
     pygame.draw.circle(screen, GREY, (850, 850), 5)
     pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
 
-    # TODO: draw a white non solid circle (search pygame documentation) of the orbit of the earth ((0,0), 1 AU distance)
+    # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
+    # TODO: move the earth every frame by 1/365
+    # TODO: draw the earth circle at that orbital_position
 
     # Update the display
     pygame.display.flip()
