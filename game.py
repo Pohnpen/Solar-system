@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Set up the display
-window_size = (400, 300)  # Width and height of the window
+window_size = (1000, 1000)  # Width and height of the window
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Circle in the Center")
 

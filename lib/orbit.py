@@ -16,7 +16,7 @@ class Orbit():
 
     def position_at(self, period=2*pi):
         # return the Vector position on the orbital plane at time
-        start = (self.center.x * cos(2 * (pi * 57.27578))) * self.distance ,  (self.center.y * sin(2 * (pi * 57.27578))) * self.distance
+        start = (self.center.x * cos(2 * pi)) * self.distance ,  (self.center.y * sin(2 * pi)) * self.distance
         return start
         # 50/t
         # t = 0.61
