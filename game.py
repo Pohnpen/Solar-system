@@ -3,6 +3,11 @@
 import pygame
 import sys
 
+from time import sleep
+
+from lib.orbit import Orbit
+from lib.vector import Vector
+
 # Initialize Pygame
 pygame.init()
 
@@ -20,10 +25,16 @@ GREY = (128, 128, 128)
 
 
 # Define constants
+TIME_FACTOR = 1 / 365
+PX_PER_AU = 400
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
+
+# TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
+earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
+moon = Orbit(earth.orbital_position, distance=20, period=27/365)
 
 # Main loop
 running = True
@@ -35,17 +46,24 @@ while running:
     # Fill the background
     screen.fill(BLACK)
 
+    # SUN DISPLAY
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
-    pygame.draw.circle(screen, BLUE, LEFT_TOP, 10)
-    pygame.draw.circle(screen, GREY, BOTTOM_RIGHT, 5)
-    pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
 
-    # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
-    # TODO: move the earth every frame by 1/365
-    # TODO: draw the earth circle at that orbital_position
+
+    # EARTH DISPLAY
+    earth.move(TIME_FACTOR)
+    pygame.draw.circle(screen, WHITE, earth.center.tuple, earth.distance, width=1)
+    pygame.draw.circle(screen, BLUE, earth.orbital_position.tuple, 10)
+
+    # MOON DISPLAY
+    moon.move(TIME_FACTOR)
+    moon.center = earth.orbital_position
+    pygame.draw.circle(screen, WHITE, earth.orbital_position.tuple, 20, width=1)
+    pygame.draw.circle(screen, GREY, moon.orbital_position.tuple, 5)
 
     # Update the display
     pygame.display.flip()
+    sleep(0.1)
 
 # Quit Pygame
 pygame.quit()

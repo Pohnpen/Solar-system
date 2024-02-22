@@ -8,7 +8,7 @@ class Orbit():
     standardd_radian = 0.0
 
     def __init__(self, center: Vector, distance, period, angle=0.0):
-        self.center = center    # Barycenter of the or bit
+        self.center = center    # Barycenter of the orbit
         self.distance = distance # Apsis of a circular orbit in AU
         self.period = period # time (1 Earth Year) for one revolution (2*pi) in radians
         self.current_angle = angle # current angle in radians
@@ -23,7 +23,7 @@ class Orbit():
         # 50/23.61
         # # 50/(23.61 % 50
 
-
+    @property
     def orbital_position(self):
         # returns the vector position of the orbit at a certain angle in radians
         return self.center.angular_displacement(self.distance, self.current_angle)
