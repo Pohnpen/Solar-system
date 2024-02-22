@@ -35,6 +35,7 @@ BOTTOM_RIGHT = (1000, 1000)
 # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position, distance=20, period=27/365)
+mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.524*PX_PER_AU, period=1.88)
 
 # Main loop
 running = True
@@ -60,6 +61,11 @@ while running:
     moon.center = earth.orbital_position
     pygame.draw.circle(screen, WHITE, earth.orbital_position.tuple, 20, width=1)
     pygame.draw.circle(screen, GREY, moon.orbital_position.tuple, 5)
+
+    # MARS DISPLAY
+    mars.move(TIME_FACTOR)
+    pygame.draw.circle(screen, WHITE, mars.center.tuple, mars.distance, width=1)
+    pygame.draw.circle(screen, BLUE, mars.orbital_position.tuple, 5)
 
     # Update the display
     pygame.display.flip()
