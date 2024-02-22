@@ -1,3 +1,5 @@
+# Pygame Documentation: https://www.pygame.org/docs/
+
 import pygame
 import sys
 
