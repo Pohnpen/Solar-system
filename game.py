@@ -15,7 +15,9 @@ pygame.display.set_caption("Solar System Viewer")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 Yellow = (225, 225, 0)
+
 center = (window_size[0] // 2, window_size[1] // 2)
+
 # Main loop
 running = True
 while running:
