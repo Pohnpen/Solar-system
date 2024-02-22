@@ -18,6 +18,7 @@ YELLOW = (225, 225, 0)
 BLUE = (0, 0, 225)
 GREY = (128, 128, 128)
 
+
 # Define constants
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
@@ -37,6 +38,7 @@ while running:
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
     pygame.draw.circle(screen, BLUE, LEFT_TOP, 10)
     pygame.draw.circle(screen, GREY, BOTTOM_RIGHT, 5)
+    pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
 
     # TODO: draw a white non solid circle (search pygame documentation) of the orbit of the earth ((0,0), 1 AU distance)
 
