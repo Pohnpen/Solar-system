@@ -20,7 +20,7 @@ BLUE = (0, 0, 225)
 # Define constants
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
-LEFT_TOP = window_size(0, 0)
+LEFT_TOP = (0, 0)
 
 # Main loop
 running = True
@@ -36,7 +36,6 @@ while running:
     # 1 Sun's radius = 0.0046524726 AU
     pygame.draw.circle(screen, YELLOW, CENTER, 0.0046524726)
 
-    # TODO: Draw a BLUE circle at the top-left coordinate of the screen.
     pygame.draw.circle(screen, BLUE, LEFT_TOP, 10)
 
     # TODO: Draw a GREY circle at the bottom-right coordinate of the screen.
