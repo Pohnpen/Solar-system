@@ -27,6 +27,11 @@ DARK_GREY = (64, 64, 64)
 LIGHT_GREY = (211, 211, 211)
 RED = (255,0,0)
 
+# Load the background image
+# Replace 'background_image.jpg' with the path to your image file
+background_image = pygame.image.load('data/sprites/stars_1k_tex.jpg')
+# Optional: Scale the image to your screen size
+background_image = pygame.transform.scale(background_image, screen_size)
 
 # Define constants
 TIME_FACTOR = 1 / 365
@@ -51,6 +56,8 @@ while running:
 
     # Fill the background
     screen.fill(BLACK)
+    # Draw the background image
+    screen.blit(background_image, (0, 0))
 
     # SUN DISPLAY
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
