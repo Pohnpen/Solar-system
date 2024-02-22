@@ -15,6 +15,7 @@ pygame.display.set_caption("Solar System Viewer")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (225, 225, 0)
+# TODO: Make a BLUE color
 
 # Define constants
 # Draw a circle in the center of the window
@@ -31,7 +32,10 @@ while running:
     screen.fill(BLACK)
 
     # pygame.draw.circle(screen, WHITE, center, 50)  # Draw circle with radius 50
+    # TODO: set the radius of the yellow circle to the Sun's radius in AU
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
+
+    # TODO: Draw a BLUE circle at the top-left coordinate of the screen.
 
     # Update the display
     pygame.display.flip()
