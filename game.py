@@ -34,13 +34,11 @@ while running:
     # Fill the background
     screen.fill(BLACK)
 
-    # TODO: Set the Sun back to 50 and the Earth to 10 radius
-    # 1 Sun's radius = 0.0046524726 AU
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
     pygame.draw.circle(screen, BLUE, LEFT_TOP, 10)
     pygame.draw.circle(screen, GREY, BOTTOM_RIGHT, 5)
 
-    # TODO: Draw a GREY circle at the bottom-right coordinate of the screen.
+    # TODO: draw a white non solid circle (search pygame documentation) of the orbit of the earth ((0,0), 1 AU distance)
 
     # Update the display
     pygame.display.flip()
