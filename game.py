@@ -23,6 +23,8 @@ WHITE = (255, 255, 255)
 YELLOW = (225, 225, 0)
 BLUE = (0, 0, 225)
 GREY = (128, 128, 128)
+DARK_GREY = (64, 64, 64)
+LIGHT_GREY = (211, 211, 211)
 RED = (255,0,0)
 
 
@@ -52,6 +54,16 @@ while running:
 
     # SUN DISPLAY
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
+
+    # MERCURY DISPLAY
+    mercury.move(TIME_FACTOR)
+    pygame.draw.circle(screen, WHITE, mercury.center.tuple, mercury.distance, width=1)
+    pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position.tuple, 4)
+
+    # VENUS DISPLAY
+    venus.move(TIME_FACTOR)
+    pygame.draw.circle(screen, WHITE, venus.center.tuple, venus.distance, width=1)
+    pygame.draw.circle(screen, LIGHT_GREY, venus.orbital_position.tuple, 9)
 
     # EARTH DISPLAY
     earth.move(TIME_FACTOR)
