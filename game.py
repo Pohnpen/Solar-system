@@ -15,7 +15,6 @@ TIME_FACTOR = 1/365
 pygame.init()
 
 # Set up the display
-# window_size = (1000, 1000)  # Width and height of the window
 window_size = pygame.display.get_desktop_sizes()[0]
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
@@ -47,8 +46,8 @@ venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position(), distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881)
-phobos = Orbit(mars.orbital_position(), distance=20, period=1/365)
-deimos = Orbit(mars.orbital_position(), distance=30, period=2/365)
+phobos = Orbit(mars.orbital_position(), distance=20, period=1/686)
+deimos = Orbit(mars.orbital_position(), distance=30, period=2/686)
 
 
 # Main loop
@@ -70,7 +69,7 @@ while running:
     # Mercury Movement
     mercury.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, mercury.distance, width=1)
-    pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position().tuple(), 2)
+    pygame.draw.circle(screen, LIGTH_BROWN, mercury.orbital_position().tuple(), 3)
 
     # Venus Movement
     venus.move(TIME_FACTOR)
