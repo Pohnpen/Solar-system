@@ -15,6 +15,7 @@ class Orbit():
 
 
     def position_at(self, period=2*pi):
+        # DEPRECATED! TODO: DELETE
         # return the Vector position on the orbital plane at time
         start = (self.center.x * cos(2 * pi)) * self.distance ,  (self.center.y * sin(2 * pi)) * self.distance
         return start
