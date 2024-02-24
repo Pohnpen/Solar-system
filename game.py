@@ -6,12 +6,10 @@ from lib.orbit import Orbit
 from lib.vector import Vector
 from time import sleep
 
-<<<<<<< HEAD
-TIME_FACTOR = 1/(365)
+
 PX_PER_AU = 400
-=======
 TIME_FACTOR = 1/365
->>>>>>> 6ef5edfbd5bc9d37d1783e4c34cf3b5d2076155c
+
 
 # Initialize Pygame
 pygame.init()
@@ -39,13 +37,14 @@ RED = (225, 0, 0)
 # TODO: PX PER AU
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
+
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
 mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241)
 venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615)
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
-moon = Orbit(earth.orbital_position(), distance=0.002679*PX_PER_AU, period=27/365)
+moon = Orbit(earth.orbital_position(), distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881)
 
 
@@ -59,10 +58,8 @@ while running:
     # Fill the background
     screen.fill(BLACK)
 
+    # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
-    #pygame.draw.circle(screen, BLUE, (217,217), 10)
-    pygame.draw.circle(screen, GREY, (850, 850), 5)
-
 
 
     # Mercury Movement
@@ -81,9 +78,10 @@ while running:
     pygame.draw.circle(screen, BLUE, earth.orbital_position().tuple(), 10)
 
     # Moon Movement
+    moon.center = earth.orbital_position()
     moon.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, earth.orbital_position().tuple(), moon.distance, width=1)
-    pygame.draw.circle(screen, GREY, moon.orbital_position().tuple(), 1)
+    pygame.draw.circle(screen, GREY, moon.orbital_position().tuple(), 2)
 
     # Mars Movement
     mars.move(TIME_FACTOR)
