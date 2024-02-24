@@ -28,20 +28,21 @@ LIGHT_GREY = (211, 211, 211)
 RED = (255,0,0)
 
 # Load the background image
-# Replace 'background_image.jpg' with the path to your image file
 background_image = pygame.image.load('data/sprites/stars_1k_tex.jpg')
-# Optional: Scale the image to your screen size
+# Scale the image to your screen size
 background_image = pygame.transform.scale(background_image, window_size)
 
 # Define constants
-TIME_FACTOR = 1 / 365
+SIMULATION_SPEED = 24
+HOURS_PER_SIMULATION_SEC = SIMULATION_SPEED/(365*24)
 PX_PER_AU = 400
-# Draw a circle in the center of the window
+
+# Coordinate Constants
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
-# TEXT STUFF
+# TEXT initialization
 font = pygame.font.Font(None, 24)
 text_color = WHITE
 
@@ -51,23 +52,65 @@ earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position, distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.524*PX_PER_AU, period=1.88)
 
+# Simulation timing
+clock = pygame.time.Clock()
+running = True; paused = False; dt = 0; earth_years_passed = 0.0
+delta_time = lambda: dt*HOURS_PER_SIMULATION_SEC
+
+def change_simulation_speed(mode, current=SIMULATION_SPEED):
+    MODES = [0, 24, 7*24, 30*24, 365*24]
+    if mode == 0:
+        return 0
+    new = MODES.index(current) + mode
+    if new in range(len(MODES)):
+        return MODES[new]
+    return current
+
+
 # Main loop
-running = True
 while running:
+
+    # EVENT HANDLING
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+    # KEY HANDLING
+    # Get the state of all keyboard buttons
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_q]:
+        running = False
+    elif keys[pygame.K_KP_PLUS]:
+        SIMULATION_SPEED = change_simulation_speed(1)
+        print("+")
+    elif keys[pygame.K_KP_MINUS]:
+        SIMULATION_SPEED = change_simulation_speed(-1)
+        print("-")
+    elif keys[pygame.K_SPACE]:
+        SIMULATION_SPEED = change_simulation_speed(0)
+    elif keys[pygame.K_w]:
+        pass
+    elif keys[pygame.K_a]:
+        pass
+    elif keys[pygame.K_s]:
+        pass
+    elif keys[pygame.K_d]:
+        pass
+
     # Fill the background
     screen.fill(BLACK)
     # Draw the background image
-    screen.blit(background_image, (0, 0))
+    screen.blit(background_image, LEFT_TOP)
+
+    text_surface = font.render(f"Earth Years: {earth_years_passed:.3f}", True, text_color)
+    text_rect = text_surface.get_rect(center=(100,100))
+    screen.blit(text_surface, text_rect)
 
     # SUN DISPLAY
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
 
     # MERCURY DISPLAY
-    mercury.move(TIME_FACTOR)
+    mercury.move(delta_time())
     pygame.draw.circle(screen, WHITE, mercury.center.tuple, mercury.distance, width=1)
     pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position.tuple, 4)
     # Render the text for Mercury
@@ -76,7 +119,7 @@ while running:
     screen.blit(text_surface, text_rect)
 
     # VENUS DISPLAY
-    venus.move(TIME_FACTOR)
+    venus.move(delta_time())
     pygame.draw.circle(screen, WHITE, venus.center.tuple, venus.distance, width=1)
     pygame.draw.circle(screen, LIGHT_GREY, venus.orbital_position.tuple, 9)
     # Render the text for Venus
@@ -85,7 +128,7 @@ while running:
     screen.blit(text_surface, text_rect)
 
     # EARTH DISPLAY
-    earth.move(TIME_FACTOR)
+    earth.move(delta_time())
     pygame.draw.circle(screen, WHITE, earth.center.tuple, earth.distance, width=1)
     pygame.draw.circle(screen, BLUE, earth.orbital_position.tuple, 10)
     # Render the text for Earth
@@ -94,7 +137,7 @@ while running:
     screen.blit(text_surface, text_rect)
 
     # MOON DISPLAY
-    moon.move(TIME_FACTOR)
+    moon.move(delta_time())
     moon.center = earth.orbital_position
     pygame.draw.circle(screen, WHITE, earth.orbital_position.tuple, 20, width=1)
     pygame.draw.circle(screen, GREY, moon.orbital_position.tuple, 5)
@@ -104,7 +147,7 @@ while running:
     screen.blit(text_surface, text_rect)
 
     # MARS DISPLAY
-    mars.move(TIME_FACTOR)
+    mars.move(delta_time())
     pygame.draw.circle(screen, WHITE, mars.center.tuple, mars.distance, width=1)
     pygame.draw.circle(screen, RED, mars.orbital_position.tuple, 5)
     # Render the text for Mars
@@ -114,7 +157,13 @@ while running:
 
     # Update the display
     pygame.display.flip()
-    sleep(0.1)
+    #sleep(0.1)
+
+    # limits FPS to 60
+    # delta_time is delta time in seconds since last frame, used for framerate-
+    # independent physics.
+    dt = clock.tick(60) / 1000
+    earth_years_passed += delta_time()
 
 # Quit Pygame
 pygame.quit()
