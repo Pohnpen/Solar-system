@@ -8,7 +8,7 @@ from time import sleep
 
 
 PX_PER_AU = 400
-TIME_FACTOR = 1/365
+TIME_FACTOR = 1/(365*24)
 
 
 # Initialize Pygame
@@ -32,6 +32,9 @@ RED = (225, 0, 0)
 LIGTH_BROWN = (214, 181, 117)
 BROWN = (94, 62, 23)
 
+# TEXT initialization
+font = pygame.font.Font(None, 24)
+text_color = WHITE
 
 # Define constants
 # TODO: PX PER AU
@@ -46,8 +49,8 @@ venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position(), distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881)
-phobos = Orbit(mars.orbital_position(), distance=20, period=1/686)
-deimos = Orbit(mars.orbital_position(), distance=30, period=2/686)
+phobos = Orbit(mars.orbital_position(), distance=20, period=0.32/365)
+deimos = Orbit(mars.orbital_position(), distance=30, period=1.26/365)
 
 
 # Main loop
@@ -61,6 +64,9 @@ while running:
     screen.fill(BLACK)
     screen.blit(imp, (0, 0))
 
+    text_surface = font.render(f"Solar System Viewer", True, text_color)
+    text_rect = text_surface.get_rect(center=(CENTER[0], 50))
+    screen.blit(text_surface, text_rect)
 
     # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
@@ -70,39 +76,60 @@ while running:
     mercury.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, mercury.distance, width=1)
     pygame.draw.circle(screen, LIGTH_BROWN, mercury.orbital_position().tuple(), 3)
+    text_surface = font.render(f"Mercury", True, text_color)
+    text_rect = text_surface.get_rect( center= (mercury.orbital_position() + Vector(0, 20)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Venus Movement
     venus.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, venus.distance, width=1)
     pygame.draw.circle(screen, LIGTH_GREY, venus.orbital_position().tuple(), 9)
+    text_surface = font.render(f"Venus", True, text_color)
+    text_rect = text_surface.get_rect( center= (venus.orbital_position() + Vector(0, 20)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Earth Movement
     earth.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, earth.distance, width=1)
     pygame.draw.circle(screen, BLUE, earth.orbital_position().tuple(), 10)
+    text_surface = font.render(f"Earth", True, text_color)
+    text_rect = text_surface.get_rect( center= (earth.orbital_position() + Vector(0, 40)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Moon Movement
     moon.center = earth.orbital_position()
     moon.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, earth.orbital_position().tuple(), moon.distance, width=1)
     pygame.draw.circle(screen, GREY, moon.orbital_position().tuple(), 2)
+    text_surface = font.render(f"Moon", True, text_color)
+    text_rect = text_surface.get_rect( center= (moon.orbital_position() + Vector(0, 20)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Mars Movement
     mars.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, mars.distance, width=1)
     pygame.draw.circle(screen, RED, mars.orbital_position().tuple(), 5)
+    text_surface = font.render(f"Mars", True, text_color)
+    text_rect = text_surface.get_rect( center= (mars.orbital_position() + Vector(0, 50)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Phobos Movement
     phobos.center = mars.orbital_position()
     phobos.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), phobos.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_BROWN, phobos.orbital_position().tuple(), 4)
+    pygame.draw.circle(screen, LIGTH_BROWN, phobos.orbital_position().tuple(), 2)
+    text_surface = font.render(f"Phobos", True, text_color)
+    text_rect = text_surface.get_rect( center= (phobos.orbital_position() + Vector(0, 20)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # Deimos Movement
     deimos.center = mars.orbital_position()
     deimos.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), deimos.distance, width=1)
-    pygame.draw.circle(screen, BROWN, deimos.orbital_position().tuple(), 4)
+    pygame.draw.circle(screen, BROWN, deimos.orbital_position().tuple(), 2)
+    text_surface = font.render(f"Deimos", True, text_color)
+    text_rect = text_surface.get_rect( center= (deimos.orbital_position() + Vector(0, 30)).tuple() )
+    screen.blit(text_surface, text_rect)
 
     # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
     # TODO: move the earth every frame by 1/365
