@@ -17,6 +17,7 @@ pygame.init()
 window_size = pygame.display.get_desktop_sizes()[0]
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
+# TODO: the name "imp" is bad! rename the variable into "background_image"
 imp = pygame.transform.scale(pygame.image.load("data/sprites/stars_1k_tex.jpg"), window_size)
 
 # Define colors
@@ -58,8 +59,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
-
+    # KEY HANDLING
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_q]:
+        running = False
 
     # Fill the background
     screen.fill(BLACK)
