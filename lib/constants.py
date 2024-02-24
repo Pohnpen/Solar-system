@@ -1,4 +1,17 @@
 GRAVITATIONAL_CONSTANT = 6.674 * 10**-11 # N m**2 / kg**2
 AU_IN_KM = 149597870.7
+PX_PER_AU = 400
+TIME_FACTOR = 1/(365*24)
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+YELLOW = (225, 225, 0)
+BLUE = (0, 0, 225)
+GREY = (128, 128, 128)
+DARK_GREY = (64, 64, 64)
+LIGTH_GREY = (99, 99 ,99)
+RED = (225, 0, 0)
+LIGTH_BROWN = (214, 181, 117)
+BROWN = (94, 62, 23)
 
 earth_radii_to_au = lambda er: er/AU_IN_KM

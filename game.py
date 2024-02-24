@@ -5,10 +5,7 @@ import sys
 from lib.orbit import Orbit
 from lib.vector import Vector
 from time import sleep
-
-# TODO: Move these constants to constant.py and import those into game.py
-PX_PER_AU = 400
-TIME_FACTOR = 1/(365*24)
+from lib.constants import *
 
 # Initialize Pygame
 pygame.init()
@@ -17,21 +14,7 @@ pygame.init()
 window_size = pygame.display.get_desktop_sizes()[0]
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
-# TODO: the name "imp" is bad! rename the variable into "background_image"
-imp = pygame.transform.scale(pygame.image.load("data/sprites/stars_1k_tex.jpg"), window_size)
-
-# Define colors
-# TODO: Move these constants to constant.py and import those into game.py
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-YELLOW = (225, 225, 0)
-BLUE = (0, 0, 225)
-GREY = (128, 128, 128)
-DARK_GREY = (64, 64, 64)
-LIGTH_GREY = (99, 99 ,99)
-RED = (225, 0, 0)
-LIGTH_BROWN = (214, 181, 117)
-BROWN = (94, 62, 23)
+background_image = pygame.transform.scale(pygame.image.load("data/sprites/stars_1k_tex.jpg"), window_size)
 
 # TEXT initialization
 font = pygame.font.Font(None, 24)
@@ -40,8 +23,7 @@ text_color = WHITE
 # Define constants for coordinates
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
-# TODO: BOTTOM_RIGHT should be based on window_size
-BOTTOM_RIGHT = (1000, 1000)
+BOTTOM_RIGHT = (window_size[0], window_size[1])
 
 # Solar System bodies and orbits
 mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241)
@@ -66,7 +48,7 @@ while running:
 
     # Fill the background
     screen.fill(BLACK)
-    screen.blit(imp, (0, 0))
+    screen.blit(background_image, (0, 0))
 
     text_surface = font.render(f"Solar System Viewer", True, text_color)
     text_rect = text_surface.get_rect(center=(CENTER[0], 50))
