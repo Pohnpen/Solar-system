@@ -20,6 +20,10 @@ class Vector():
         x, y = self.x * self.scalar, self.y * self.scalar
         return Vector(x, y)
 
+    def tuple(self):
+        # TODO: Make a tuple representation
+        pass
+
     def __str__(self):
         return f"({self.x}, {self.y})"
 
