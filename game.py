@@ -52,7 +52,7 @@ while running:
     pygame.draw.circle(screen, GREY, (850, 850), 5)
     pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
 
-
+    earth.move(TIME_FACTOR)
 
 
 
