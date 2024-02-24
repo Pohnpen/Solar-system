@@ -2,6 +2,10 @@
 
 import pygame
 import sys
+from lib.orbit import Orbit
+from lib.vector import Vector
+
+TIME_FACTOR = 1/(365)
 
 # Initialize Pygame
 pygame.init()
@@ -10,6 +14,9 @@ pygame.init()
 window_size = (1000, 1000)  # Width and height of the window
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
+# earth = pygame.draw.move.circle(screen, BLUE, (217,217), 10)
+# orbit = pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
+# move = pygame.display.info(earth, orbit)
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -25,6 +32,8 @@ CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
+EARTH = pygame.draw.circle(screen, BLUE, (225,225), 10)
+
 # Main loop
 running = True
 while running:
@@ -36,9 +45,12 @@ while running:
     screen.fill(BLACK)
 
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
-    pygame.draw.circle(screen, BLUE, (250,250), 10)
+    pygame.draw.circle(screen, BLUE, (217,217), 10)
     pygame.draw.circle(screen, GREY, (850, 850), 5)
     pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
+
+
+
 
     # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
     # TODO: move the earth every frame by 1/365
