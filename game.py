@@ -15,12 +15,11 @@ TIME_FACTOR = 1/365
 pygame.init()
 
 # Set up the display
-window_size = (1000, 1000)  # Width and height of the window
+# window_size = (1000, 1000)  # Width and height of the window
+window_size = pygame.display.get_desktop_sizes()[0]
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Solar System Viewer")
-# earth = pygame.draw.move.circle(screen, BLUE, (217,217), 10)
-# orbit = pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
-# move = pygame.display.info(earth, orbit)
+imp = pygame.transform.scale(pygame.image.load("data/sprites/stars_1k_tex.jpg"), window_size)
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -57,6 +56,8 @@ while running:
 
     # Fill the background
     screen.fill(BLACK)
+    screen.blit(imp, (0, 0))
+
 
     # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
