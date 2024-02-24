@@ -32,7 +32,8 @@ CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
-EARTH = pygame.draw.circle(screen, BLUE, (225,225), 10)
+# EARTH = pygame.draw.circle(screen, BLUE, (225,225), 10)
+earth = Orbit(Vector(0,0), distance=1.0, period=1.0)
 
 # Main loop
 running = True
@@ -48,6 +49,7 @@ while running:
     pygame.draw.circle(screen, BLUE, (217,217), 10)
     pygame.draw.circle(screen, GREY, (850, 850), 5)
     pygame.draw.circle(screen, WHITE, CENTER, 400, width=1)
+
 
 
 
