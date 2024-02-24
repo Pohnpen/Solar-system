@@ -26,8 +26,8 @@ GREY = (128, 128, 128)
 DARK_GREY = (64, 64, 64)
 LIGHT_GREY = (211, 211, 211)
 RED = (255, 0, 0)
-LIGHT_BROWN = ()
-BROWN = ()
+LIGHT_BROWN = (214, 181, 117)
+BROWN = (94, 62, 23)
 
 # Load the background image
 background_image = pygame.image.load('data/sprites/stars_1k_tex.jpg')
