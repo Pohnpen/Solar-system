@@ -6,8 +6,12 @@ from lib.orbit import Orbit
 from lib.vector import Vector
 from time import sleep
 
+<<<<<<< HEAD
 TIME_FACTOR = 1/(365)
 PX_PER_AU = 400
+=======
+TIME_FACTOR = 1/365
+>>>>>>> 6ef5edfbd5bc9d37d1783e4c34cf3b5d2076155c
 
 # Initialize Pygame
 pygame.init()
@@ -32,6 +36,7 @@ RED = (225, 0, 0)
 
 
 # Define constants
+# TODO: PX PER AU
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
