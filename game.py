@@ -8,7 +8,7 @@ from time import sleep
 
 
 PX_PER_AU = 400
-TIME_FACTOR = 1/365
+TIME_FACTOR = 1/(365*24)
 
 
 # Initialize Pygame
@@ -47,8 +47,8 @@ venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position(), distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881)
-phobos = Orbit(mars.orbital_position(), distance=20, period=1/365)
-deimos = Orbit(mars.orbital_position(), distance=30, period=2/365)
+phobos = Orbit(mars.orbital_position(), distance=20, period=0.32/365)
+deimos = Orbit(mars.orbital_position(), distance=30, period=1.26/365)
 
 
 # Main loop
@@ -70,7 +70,7 @@ while running:
     # Mercury Movement
     mercury.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, CENTER, mercury.distance, width=1)
-    pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position().tuple(), 2)
+    pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position().tuple(), 3)
 
     # Venus Movement
     venus.move(TIME_FACTOR)
@@ -97,13 +97,13 @@ while running:
     phobos.center = mars.orbital_position()
     phobos.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), phobos.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_BROWN, phobos.orbital_position().tuple(), 4)
+    pygame.draw.circle(screen, LIGTH_BROWN, phobos.orbital_position().tuple(), 2)
 
     # Deimos Movement
     deimos.center = mars.orbital_position()
     deimos.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), deimos.distance, width=1)
-    pygame.draw.circle(screen, BROWN, deimos.orbital_position().tuple(), 4)
+    pygame.draw.circle(screen, BROWN, deimos.orbital_position().tuple(), 2)
 
     # TODO: Create an orbit called "Earth" object at the CENTER with a distance of 1.0 AU and a period of 1.0 EY
     # TODO: move the earth every frame by 1/365
