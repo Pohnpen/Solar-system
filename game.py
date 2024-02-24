@@ -41,6 +41,10 @@ CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (1000, 1000)
 
+# TEXT STUFF
+font = pygame.font.Font(None, 24)
+text_color = WHITE
+
 mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.387*PX_PER_AU, period=88/365)
 venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.723*PX_PER_AU, period=225/365)
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
@@ -66,27 +70,47 @@ while running:
     mercury.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mercury.center.tuple, mercury.distance, width=1)
     pygame.draw.circle(screen, DARK_GREY, mercury.orbital_position.tuple, 4)
+    # Render the text for Mercury
+    text_surface = font.render("Mercury", True, text_color)
+    text_rect = text_surface.get_rect(center=(mercury.orbital_position + Vector(50,20)).tuple)
+    screen.blit(text_surface, text_rect)
 
     # VENUS DISPLAY
     venus.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, venus.center.tuple, venus.distance, width=1)
     pygame.draw.circle(screen, LIGHT_GREY, venus.orbital_position.tuple, 9)
+    # Render the text for Venus
+    text_surface = font.render("Venus", True, text_color)
+    text_rect = text_surface.get_rect(center=(venus.orbital_position + Vector(50, 20)).tuple)
+    screen.blit(text_surface, text_rect)
 
     # EARTH DISPLAY
     earth.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, earth.center.tuple, earth.distance, width=1)
     pygame.draw.circle(screen, BLUE, earth.orbital_position.tuple, 10)
+    # Render the text for Earth
+    text_surface = font.render("Earth", True, text_color)
+    text_rect = text_surface.get_rect(center=(earth.orbital_position + Vector(50, 20)).tuple)
+    screen.blit(text_surface, text_rect)
 
     # MOON DISPLAY
     moon.move(TIME_FACTOR)
     moon.center = earth.orbital_position
     pygame.draw.circle(screen, WHITE, earth.orbital_position.tuple, 20, width=1)
     pygame.draw.circle(screen, GREY, moon.orbital_position.tuple, 5)
+    # Render the text for Moon
+    text_surface = font.render("Moon", True, text_color)
+    text_rect = text_surface.get_rect(center=(moon.orbital_position + Vector(50, 20)).tuple)
+    screen.blit(text_surface, text_rect)
 
     # MARS DISPLAY
     mars.move(TIME_FACTOR)
     pygame.draw.circle(screen, WHITE, mars.center.tuple, mars.distance, width=1)
     pygame.draw.circle(screen, RED, mars.orbital_position.tuple, 5)
+    # Render the text for Mars
+    text_surface = font.render("Mars", True, text_color)
+    text_rect = text_surface.get_rect(center=(mars.orbital_position + Vector(50, 20)).tuple)
+    screen.blit(text_surface, text_rect)
 
     # Update the display
     pygame.display.flip()
