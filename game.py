@@ -53,8 +53,8 @@ venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.723*PX_PER_AU, period=225/
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position, distance=20, period=27/365)
 mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.524*PX_PER_AU, period=1.88)
-phobos = Orbit(mars.orbital_position(), distance=20, period=0.32/365)
-deimos = Orbit(mars.orbital_position(), distance=30, period=1.26/365)
+phobos = Orbit(mars.orbital_position, distance=20, period=0.32/365)
+deimos = Orbit(mars.orbital_position, distance=30, period=1.26/365)
 
 # Simulation timing
 clock = pygame.time.Clock()
@@ -160,16 +160,16 @@ while running:
     screen.blit(text_surface, text_rect)
 
     # Phobos Movement
-    phobos.center = mars.orbital_position()
+    phobos.center = mars.orbital_position
     phobos.move(delta_time())
-    pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), phobos.distance, width=1)
-    pygame.draw.circle(screen, LIGHT_BROWN, phobos.orbital_position().tuple(), 2)
+    pygame.draw.circle(screen, WHITE, mars.orbital_position.tuple, phobos.distance, width=1)
+    pygame.draw.circle(screen, LIGHT_BROWN, phobos.orbital_position.tuple, 2)
 
     # Deimos Movement
-    deimos.center = mars.orbital_position()
+    deimos.center = mars.orbital_position
     deimos.move(delta_time())
-    pygame.draw.circle(screen, WHITE, mars.orbital_position().tuple(), deimos.distance, width=1)
-    pygame.draw.circle(screen, BROWN, deimos.orbital_position().tuple(), 2)
+    pygame.draw.circle(screen, WHITE, mars.orbital_position.tuple, deimos.distance, width=1)
+    pygame.draw.circle(screen, BROWN, deimos.orbital_position.tuple, 2)
 
 
     # Update the display
