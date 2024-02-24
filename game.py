@@ -5,7 +5,7 @@ import sys
 from lib.orbit import Orbit
 from lib.vector import Vector
 
-TIME_FACTOR = 1/(365)
+TIME_FACTOR = 1/365
 
 # Initialize Pygame
 pygame.init()
@@ -28,7 +28,6 @@ GREY = (128, 128, 128)
 
 # Define constants
 # TODO: PX PER AU
-# TODO: TIMEFACTOR
 # Draw a circle in the center of the window
 CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
