@@ -33,6 +33,9 @@ RED = (225, 0, 0)
 LIGTH_BROWN = (214, 181, 117)
 BROWN = (94, 62, 23)
 
+# TEXT initialization
+font = pygame.font.Font(None, 24)
+text_color = WHITE
 
 # Define constants
 # TODO: PX PER AU
@@ -62,6 +65,9 @@ while running:
     screen.fill(BLACK)
     screen.blit(imp, (0, 0))
 
+    text_surface = font.render(f"Solar System Viewer", True, text_color)
+    text_rect = text_surface.get_rect(center=(CENTER[0], 50))
+    screen.blit(text_surface, text_rect)
 
     # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
