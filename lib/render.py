@@ -29,8 +29,9 @@ class PyGameDrawCircleMixin():
     #
     # Drawing interface
     #
-    def draw(self, surface):
-        pygame.draw.circle(surface, self.color, self.position.tuple(), self.radius, width=self.width)
+    def draw(self, surface, offset=[0,0]):
+        offset_position = (self.position + Vector(*offset)).tuple()
+        pygame.draw.circle(surface, self.color, offset_position, self.radius, width=self.width)
 
 
 class PyGameDrawText():

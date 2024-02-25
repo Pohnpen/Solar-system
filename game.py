@@ -31,6 +31,11 @@ CENTER = (window_size[0] // 2, window_size[1] // 2)
 LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (window_size[0], window_size[1])
 
+# Initial offset
+PAN_OFFSET = [0,0]
+# Speed of panning
+PAN_SPEED_PX = 5
+
 # Solar System bodies and orbits
 sun = Planetoid(100, 333, "Sun", YELLOW, Orbit(Vector(CENTER[0],CENTER[1]),0,0))
 mercury = Planetoid(3, 0.055, "Mercury", DARK_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241))
@@ -56,7 +61,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # # KEY HANDLING: Check if a key is released
+        # KEY HANDLING: Check if a key is released
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 running = False
@@ -70,14 +75,23 @@ while running:
             elif event.key == pygame.K_SPACE:
                 current_simulation_speed = change_simulation_speed(0, current_simulation_speed)
                 print(f"Sim Speed {current_simulation_speed} (Stopped)")
-            elif event.key == pygame.K_w:
-                pass
-            elif event.key == pygame.K_a:
-                pass
-            elif event.key == pygame.K_s:
-                pass
-            elif event.key == pygame.K_d:
-                pass
+            elif event.key == pygame.K_KP_MINUS:
+                PAN_OFFSET = (0,0)
+                print(f"Pan Offset: {PAN_OFFSET}")
+        # Key press states
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w]:
+            PAN_OFFSET[1] -= PAN_SPEED_PX
+            print(f"Pan Offset: {PAN_OFFSET}")
+        if keys[pygame.K_s]:
+            PAN_OFFSET[1] += PAN_SPEED_PX
+            print(f"Pan Offset: {PAN_OFFSET}")
+        if keys[pygame.K_a]:
+            PAN_OFFSET[0] -= PAN_SPEED_PX
+            print(f"Pan Offset: {PAN_OFFSET}")
+        if keys[pygame.K_d]:
+            PAN_OFFSET[0] += PAN_SPEED_PX
+            print(f"Pan Offset: {PAN_OFFSET}")
 
     # Fill the background
     screen.fill(BLACK)
@@ -91,7 +105,7 @@ while running:
     text_rect = text_surface.get_rect(center=(CENTER[0], 50))
     screen.blit(text_surface, text_rect)
 
-    text_surface = font.render(f"Sim Speed: {current_simulation_speed / EARTH_HOURS_PER_EARTH_YEAR:.5f} Earth Years", True, text_color)
+    text_surface = font.render(f"Sim Speed: {current_simulation_speed} h/s", True, text_color)
     text_rect = text_surface.get_rect(center=(100, 100))
     screen.blit(text_surface, text_rect)
 
@@ -104,7 +118,7 @@ while running:
     #
     for object in solar_system:
         object.move(dt * current_simulation_speed / EARTH_HOURS_PER_EARTH_YEAR)
-        object.draw(screen)
+        object.draw(screen, PAN_OFFSET)
 
     # Update the display
     pygame.display.flip()

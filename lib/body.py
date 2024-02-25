@@ -105,9 +105,9 @@ class Planetoid(PyGameDrawCircleMixin):
     def __str__(self):
         return f"{self.name} is at {self.position}"
 
-    def draw(self, surface):
-        self.orbit.draw(surface)
-        super().draw(surface)
+    def draw(self, surface, offset=[0,0]):
+        self.orbit.draw(surface, offset)
+        super().draw(surface, offset)
 
 if __name__ == "__main__":
     pass
