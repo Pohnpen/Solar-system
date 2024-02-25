@@ -21,7 +21,7 @@ class Vector():
         return Vector(x, y)
 
     def tuple(self):
-        # TODO: Make a tuple representation
+        # Tuple representation
         return (self.x, self.y)
 
     def __str__(self):
