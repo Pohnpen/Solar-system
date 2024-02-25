@@ -34,6 +34,7 @@ mars = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881)
 phobos = Orbit(mars.orbital_position(), distance=20, period=0.32/365)
 deimos = Orbit(mars.orbital_position(), distance=30, period=1.26/365)
 
+#earth = Body(R,C,O=Orbit(bc=Vector(),d,p,cw))
 
 # Main loop
 running = True
@@ -75,6 +76,7 @@ while running:
 
     # Earth Movement
     earth.move(TIME_FACTOR)
+    #earth.draw()
     pygame.draw.circle(screen, WHITE, CENTER, earth.distance, width=1)
     pygame.draw.circle(screen, BLUE, earth.orbital_position().tuple(), 10)
     text_surface = font.render(f"Earth", True, text_color)
