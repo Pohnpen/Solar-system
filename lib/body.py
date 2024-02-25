@@ -2,9 +2,7 @@
 
 from math import pi
 
-from .constants import GRAVITATIONAL_CONSTANT
-from .vector import Vector
-from .orbit import Orbit
+from . import *
 
 class Planetoid():
 

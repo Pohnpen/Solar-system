@@ -16,5 +16,7 @@ RED = (225, 0, 0)
 LIGTH_BROWN = (214, 181, 117)
 BROWN = (94, 62, 23)
 
+EARTH_MASS = 1 * ((5.972168) * 10**24) #kg 
+
 
 GRAVITATIONAL_CONSTANT = 6.674 * 10**-11 # N m**2 / kg**2

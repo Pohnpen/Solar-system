@@ -1,13 +1,12 @@
 # Orbit of the object in Solar system
 
 from math import pi, sin, cos
-from .vector import Vector
-from .constants import GRAVITATIONAL_CONSTANT
+from . import *
 
 class Orbit():
 
     def __init__(self, center: Vector, distance, period, angle=0.0):
-        self.center = center    # Barycenter of the or bit
+        self.center = center    # Barycenter of the orbit
         self.distance = distance # Apsis of a circular orbit in AU
         self.period = period # time (1 Earth Year) for one revolution (2*pi) in radians
         self.current_angle = angle # current angle in radians
