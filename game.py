@@ -1,10 +1,10 @@
-# Pygame Documentation: https://www.pygame.org/docs/
-
-import pygame
+import pygame # Pygame Documentation: https://www.pygame.org/docs/
 import sys
-from time import sleep
 
 from lib.constants import *
+from utils import change_simulation_speed
+
+
 from lib.vector import Vector
 from lib.body import Planetoid, Orbit
 
@@ -21,11 +21,6 @@ screen = pygame.display.set_mode(window_size)
 
 pygame.display.set_caption("Solar System Viewer")
 background_image = pygame.transform.scale(pygame.image.load("data/sprites/stars_1k_tex.jpg"), window_size)
-
-# Define constants
-SIMULATION_SPEED = 24
-HOURS_PER_SIMULATION_SEC = SIMULATION_SPEED/(365*24)
-PX_PER_AU = 400
 
 # TEXT initialization
 font = pygame.font.Font(None, 24)
@@ -50,18 +45,8 @@ solar_system = [sun,mercury,venus,earth,moon,mars,phobos,deimos]
 
 # Simulation timing
 clock = pygame.time.Clock()
-running = True; paused = False; dt = 0; earth_years_passed = 0.0
-delta_time = lambda: dt*HOURS_PER_SIMULATION_SEC
-
-def change_simulation_speed(mode, current=SIMULATION_SPEED):
-    MODES = [0, 24, 7*24, 30*24, 365*24]
-    if mode == 0:
-        return 0
-    new = MODES.index(current) + mode
-    if new in range(len(MODES)):
-        return MODES[new]
-    return current
-
+running = True; dt = 0; earth_hours_passed = 0.0
+current_simulation_speed = SIMULATION_SPEED_MODES[3]
 
 # Main loop
 while running:
@@ -81,13 +66,13 @@ while running:
     if keys[pygame.K_q]:
         running = False
     elif keys[pygame.K_KP_PLUS]:
-        SIMULATION_SPEED = change_simulation_speed(1)
+        current_simulation_speed = change_simulation_speed(1, current_simulation_speed)
         print("+")
     elif keys[pygame.K_KP_MINUS]:
-        SIMULATION_SPEED = change_simulation_speed(-1)
+        current_simulation_speed = change_simulation_speed(-1, current_simulation_speed)
         print("-")
     elif keys[pygame.K_SPACE]:
-        SIMULATION_SPEED = change_simulation_speed(0)
+        current_simulation_speed = change_simulation_speed(0, current_simulation_speed)
     elif keys[pygame.K_w]:
         pass
     elif keys[pygame.K_a]:
@@ -106,90 +91,23 @@ while running:
     text_rect = text_surface.get_rect(center=(CENTER[0], 50))
     screen.blit(text_surface, text_rect)
 
+    text_surface = font.render(f"Earth Years: {earth_hours_passed/EARTH_HOURS_PER_EARTH_YEAR:.5f}", True, text_color)
+    text_rect = text_surface.get_rect(center=(100, 100))
+    screen.blit(text_surface, text_rect)
+
     #
     # Move and Draw the solar System
     #
     for object in solar_system:
-        object.move(TIME_FACTOR)
+        object.move(dt * current_simulation_speed / EARTH_HOURS_PER_EARTH_YEAR)
         object.draw(screen)
-
-    """
-    # Static Sun
-    pygame.draw.circle(screen, YELLOW, CENTER, 50)
-
-    # Mercury Movement
-    mercury.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, CENTER, mercury.orbit.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_BROWN, mercury.position.tuple(), 3)
-    text_surface = font.render(f"{mercury.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (mercury.position + Vector(0, 20)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Venus Movement
-    venus.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, CENTER, venus.orbit.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_GREY, venus.position.tuple(), 9)
-    text_surface = font.render(f"{venus.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (venus.position + Vector(0, 20)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Earth Movement
-    earth.move(TIME_FACTOR)
-    #earth.draw()
-    pygame.draw.circle(screen, WHITE, CENTER, earth.orbit.distance, width=1)
-    pygame.draw.circle(screen, BLUE, earth.position.tuple(), 10)
-    text_surface = font.render(f"{earth.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (earth.position + Vector(0, 40)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Moon Movement
-    moon.orbit.center = earth.position
-    moon.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, earth.position.tuple(), moon.orbit.distance, width=1)
-    pygame.draw.circle(screen, GREY, moon.position.tuple(), 2)
-    text_surface = font.render(f"{moon.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (moon.position + Vector(0, 20)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Mars Movement
-    mars.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, CENTER, mars.orbit.distance, width=1)
-    pygame.draw.circle(screen, RED, mars.position.tuple(), 5)
-    text_surface = font.render(f"{mars.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (mars.position + Vector(0, 50)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Phobos Movement
-    phobos.orbit.center = mars.position
-    phobos.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, mars.position.tuple(), phobos.orbit.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_BROWN, phobos.position.tuple(), 2)
-    text_surface = font.render(f"{phobos.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (phobos.position + Vector(0, 20)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    # Deimos Movement
-    deimos.orbit.center = mars.position
-    deimos.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, mars.position.tuple(), deimos.orbit.distance, width=1)
-    pygame.draw.circle(screen, BROWN, deimos.position.tuple(), 2)
-    text_surface = font.render(f"{deimos.name}", True, text_color)
-    text_rect = text_surface.get_rect( center= (deimos.position + Vector(0, 30)).tuple() )
-    screen.blit(text_surface, text_rect)
-
-    """
 
     # Update the display
     pygame.display.flip()
-    #sleep(0.1)
 
-    # limits FPS to 60
-    # delta_time is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
-    earth_years_passed += delta_time()
-
-    sleep(0.1)
+    # dt is delta time in seconds since last frame, used for framerate-independent physics.
+    dt = clock.tick(60) / 1000 # limits FPS to 60
+    earth_hours_passed += dt * current_simulation_speed
 
 # Quit Pygame
 pygame.quit()

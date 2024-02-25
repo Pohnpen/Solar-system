@@ -1,4 +1,7 @@
-TIME_FACTOR = 1/(365)
+# Simulation Speed in hours per ingame seconds
+SIMULATION_SPEED_MODES = [0, 1, 24, 7*24, 30*24, 365*24]
+
+EARTH_HOURS_PER_EARTH_YEAR = 365*24
 
 AU_IN_KM = 149597870.7
 PX_PER_AU = 400
