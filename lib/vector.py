@@ -20,15 +20,15 @@ class Vector():
         x, y = self.x * self.scalar, self.y * self.scalar
         return Vector(x, y)
 
+    def tuple(self):
+        # Tuple representation
+        return (self.x, self.y)
+
     def __repr__(self):
-        return self.tuple
+        return self.tuple()
 
     def __str__(self):
         return f"({self.x}, {self.y})"
-
-    @property
-    def tuple(self):
-        return (self.x, self.y)
 
     def distance(self, other):
         # distance return as a float
