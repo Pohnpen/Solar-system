@@ -30,9 +30,6 @@ class Body():
         return ((GRAVITATIONAL_CONSTANT * other.mass) / distance)**0.5
 
 
-    def position at 
-
-
 if __name__ == "__main__":
     earth = Body(Vector(3,4), 1, 1, 12)
     moon = Body(Vector(3.4,4.5), 0.16, 0.2, 6)
