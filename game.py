@@ -2,9 +2,11 @@
 
 import pygame
 import sys
+from time import sleep
+
 from lib.orbit import Orbit
 from lib.vector import Vector
-from time import sleep
+from lib.body import Planetoid
 from lib.constants import *
 
 # Initialize Pygame
@@ -26,7 +28,9 @@ LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (window_size[0], window_size[1])
 
 # Solar System bodies and orbits
-mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241)
+# mercury = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241)
+mercury = Planetoid(3, 10, "Mercury", Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241))
+
 venus = Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615)
 earth = Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0)
 moon = Orbit(earth.orbital_position(), distance=20, period=27/365)
@@ -60,10 +64,10 @@ while running:
 
     # Mercury Movement
     mercury.move(TIME_FACTOR)
-    pygame.draw.circle(screen, WHITE, CENTER, mercury.distance, width=1)
-    pygame.draw.circle(screen, LIGTH_BROWN, mercury.orbital_position().tuple(), 3)
-    text_surface = font.render(f"Mercury", True, text_color)
-    text_rect = text_surface.get_rect( center= (mercury.orbital_position() + Vector(0, 20)).tuple() )
+    pygame.draw.circle(screen, WHITE, CENTER, mercury.orbit.distance, width=1)
+    pygame.draw.circle(screen, LIGTH_BROWN, mercury.position.tuple(), 3)
+    text_surface = font.render(f"{mercury.name}", True, text_color)
+    text_rect = text_surface.get_rect( center= (mercury.position + Vector(0, 20)).tuple() )
     screen.blit(text_surface, text_rect)
 
     # Venus Movement
