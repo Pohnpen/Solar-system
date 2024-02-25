@@ -28,13 +28,13 @@ BOTTOM_RIGHT = (window_size[0], window_size[1])
 
 # Solar System bodies and orbits
 sun = Planetoid(100, 333, "Sun", YELLOW, Orbit(Vector(CENTER[0],CENTER[1]),0,0))
-mercury = Planetoid(3, 0.055, "Mercury", DARK_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241))
-venus = Planetoid(9, 0.815, "Venus", LIGTH_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615))
-earth = Planetoid(10, 1, "Earth", BLUE, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0))
-moon = Planetoid(2, 0.0012, "Moon", GREY, Orbit(earth, distance=20, period=27/365))
-mars = Planetoid(4, 0.107, "Mars", RED, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881))
-phobos = Planetoid(2, 0.0005, "Phobos", BROWN, Orbit(mars, distance=20, period=0.32/365))
-deimos = Planetoid(2, 0.00025, "Deimos", LIGTH_BROWN, Orbit(mars, distance=30, period=1.26/365))
+mercury = Planetoid(3, 0.055, "Mercury", DARK_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241, clockwise=-1))
+venus = Planetoid(9, 0.815, "Venus", LIGTH_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615, clockwise=-1))
+earth = Planetoid(10, 1, "Earth", BLUE, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0, clockwise=-1))
+moon = Planetoid(2, 0.0012, "Moon", GREY, Orbit(earth, distance=20, period=27/365, clockwise=-1))
+mars = Planetoid(4, 0.107, "Mars", RED, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881,clockwise=-1))
+phobos = Planetoid(2, 0.0005, "Phobos", BROWN, Orbit(mars, distance=20, period=0.32/365, clockwise=-1))
+deimos = Planetoid(2, 0.00025, "Deimos", LIGTH_BROWN, Orbit(mars, distance=30, period=1.26/365, clockwise=-1))
 
 solar_system = [sun,mercury,venus,earth,moon,mars,phobos,deimos]
 

@@ -5,8 +5,8 @@ from .render import PyGameDrawCircleMixin
 from .vector import Vector
 
 class Orbit(PyGameDrawCircleMixin):
-    """# Orbit of the object in Solar system"""
-    def __init__(self, center: Vector, distance, period, angle=0.0):
+    """Orbit of the object in Solar system"""
+    def __init__(self, center: Vector, distance, period, clockwise=1, angle=0.0):
         self.parent = None # if a parent moving body is set
         if center.__class__.__name__ == "Planetoid":
             self.parent = center
@@ -16,6 +16,7 @@ class Orbit(PyGameDrawCircleMixin):
         self.distance = distance # Apsis of a circular orbit in AU
         self.period = period # time (1 Earth Year) for one revolution (2*pi) in radians
         self.current_angle = angle # current angle in radians
+        self.clockwise = clockwise # clockwise is the direction of regular object will move, -1 for counterclockwise
 
     @property
     def center(self):
@@ -31,7 +32,7 @@ class Orbit(PyGameDrawCircleMixin):
 
     def move(self, delta_time):
         if not self.is_static:
-            self.current_angle += (2*pi)*(delta_time/self.period)
+            self.current_angle += ((2*pi)*(delta_time/self.period)) * self.clockwise
 
     def __str__(self):
         #return str(self.current_angle)
