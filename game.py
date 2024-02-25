@@ -55,32 +55,29 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    # KEY HANDLING
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_q]:
-        running = False
 
-    # KEY HANDLING
-    # Get the state of all keyboard buttons
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_q]:
-        running = False
-    elif keys[pygame.K_KP_PLUS]:
-        current_simulation_speed = change_simulation_speed(1, current_simulation_speed)
-        print("+")
-    elif keys[pygame.K_KP_MINUS]:
-        current_simulation_speed = change_simulation_speed(-1, current_simulation_speed)
-        print("-")
-    elif keys[pygame.K_SPACE]:
-        current_simulation_speed = change_simulation_speed(0, current_simulation_speed)
-    elif keys[pygame.K_w]:
-        pass
-    elif keys[pygame.K_a]:
-        pass
-    elif keys[pygame.K_s]:
-        pass
-    elif keys[pygame.K_d]:
-        pass
+        # # KEY HANDLING: Check if a key is released
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_q:
+                running = False
+                print("Quit Program")
+            elif event.key == pygame.K_KP_PLUS:
+                current_simulation_speed = change_simulation_speed(1, current_simulation_speed)
+                print(f"Sim Speed {current_simulation_speed}")
+            elif event.key == pygame.K_KP_MINUS:
+                current_simulation_speed = change_simulation_speed(-1, current_simulation_speed)
+                print(f"Sim Speed {current_simulation_speed}")
+            elif event.key == pygame.K_SPACE:
+                current_simulation_speed = change_simulation_speed(0, current_simulation_speed)
+                print(f"Sim Speed {current_simulation_speed} (Stopped)")
+            elif event.key == pygame.K_w:
+                pass
+            elif event.key == pygame.K_a:
+                pass
+            elif event.key == pygame.K_s:
+                pass
+            elif event.key == pygame.K_d:
+                pass
 
     # Fill the background
     screen.fill(BLACK)
