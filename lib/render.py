@@ -1,7 +1,6 @@
 import pygame
 
-WHITE = (255, 255, 255)
-STANDARD_FONT = pygame.font.Font(None, 24)
+from .vector import Vector
 
 class PyGameDrawCircleMixin():
     #
@@ -10,7 +9,7 @@ class PyGameDrawCircleMixin():
     @property
     def position(self):
         # returns the position of the object as a tuple, defaults to (0,0)
-        return (0,0)
+        return Vector(0,0)
 
     @property
     def radius(self):
@@ -18,25 +17,25 @@ class PyGameDrawCircleMixin():
         return 1.0
 
     @property
-    def solid(self):
+    def width(self):
         # returns 0 for solid, any number for border thickness in px
         return 0
 
     @property
     def color(self):
         # returns RGB tuple for color, defaults to white
-        return WHITE
+        return (255, 255, 255)
 
     #
     # Drawing interface
     #
     def draw(self, surface):
-        pygame.draw.circle(surface, self.color, self.position, self.radius, width=self.solid)
+        pygame.draw.circle(surface, self.color, self.position.tuple(), self.radius, width=self.width)
 
 
 class PyGameDrawText():
 
-    def __init__(self, text, color=WHITE, font=STANDARD_FONT):
+    def __init__(self, text, color=(255, 255, 255)):
         self.text = text
         self.color = color
         self.font = font
@@ -49,7 +48,7 @@ class PyGameDrawText():
     #
     # Drawing interface
     #
-    def draw(self, surface):
-        text_surface = self.font.render(self.text, True, self.color)
+    def draw(self, surface, font):
+        text_surface = font.render(self.text, True, self.color)
         text_rect = text_surface.get_rect(center=self.position)
         surface.blit(text_surface, text_rect)

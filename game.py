@@ -4,7 +4,9 @@ import pygame
 import sys
 from time import sleep
 
-from lib import *
+from lib.constants import *
+from lib.vector import Vector
+from lib.body import Planetoid, Orbit
 
 # Initialize Pygame
 pygame.init()
@@ -25,18 +27,16 @@ LEFT_TOP = (0, 0)
 BOTTOM_RIGHT = (window_size[0], window_size[1])
 
 # Solar System bodies and orbits
-mercury = Planetoid(3, 0.055, "Mercury", Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241))
+sun = Planetoid(100, 333, "Sun", YELLOW, Orbit(Vector(CENTER[0],CENTER[1]),0,0))
+mercury = Planetoid(3, 0.055, "Mercury", DARK_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.39*PX_PER_AU, period=0.241))
+venus = Planetoid(9, 0.815, "Venus", LIGTH_GREY, Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615))
+earth = Planetoid(10, 1, "Earth", BLUE, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0))
+moon = Planetoid(2, 0.0012, "Moon", GREY, Orbit(earth, distance=20, period=27/365))
+mars = Planetoid(4, 0.107, "Mars", RED, Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881))
+phobos = Planetoid(2, 0.0005, "Phobos", BROWN, Orbit(mars, distance=20, period=0.32/365))
+deimos = Planetoid(2, 0.00025, "Deimos", LIGTH_BROWN, Orbit(mars, distance=30, period=1.26/365))
 
-venus = Planetoid(9, 0.815, "Venus", Orbit(Vector(CENTER[0],CENTER[1]), distance=0.72*PX_PER_AU, period=0.615))
-
-earth = Planetoid(10, 1, "Earth", Orbit(Vector(CENTER[0],CENTER[1]), distance=1.0*PX_PER_AU, period=1.0))
-moon = Planetoid(2, 0.0012, "Moon", Orbit(earth.position, distance=20, period=27/365))
-
-mars = Planetoid(4, 0.107, "Mars", Orbit(Vector(CENTER[0],CENTER[1]), distance=1.52*PX_PER_AU, period=1.881))
-phobos = Planetoid(2, 0.0005, "Phobos", Orbit(mars.position, distance=20, period=0.32/365))
-deimos = Planetoid(2, 0.00025, "Deimos", Orbit(mars.position, distance=30, period=1.26/365))
-
-solar_system = []
+solar_system = [sun,mercury,venus,earth,moon,mars,phobos,deimos]
 
 # Main loop
 running = True
@@ -60,7 +60,11 @@ while running:
     #
     # Move and Draw the solar System
     #
+    for object in solar_system:
+        object.move(TIME_FACTOR)
+        object.draw(screen)
 
+    """
     # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
 
@@ -123,6 +127,8 @@ while running:
     text_surface = font.render(f"{deimos.name}", True, text_color)
     text_rect = text_surface.get_rect( center= (deimos.position + Vector(0, 30)).tuple() )
     screen.blit(text_surface, text_rect)
+
+    """
 
     # Update the display
     pygame.display.flip()
