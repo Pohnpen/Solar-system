@@ -5,7 +5,7 @@ from .vector import Vector
 from .constants import GRAVITATIONAL_CONSTANT
 
 class Orbit():
-    
+
     def __init__(self, center: Vector, distance, period, angle=0.0):
         self.center = center    # Barycenter of the or bit
         self.distance = distance # Apsis of a circular orbit in AU
@@ -14,11 +14,20 @@ class Orbit():
 
     def orbital_position(self):
         # returns the vector position of the orbit at a certain angle in radians
+        if self.is_static:
+            return self.center
         return self.center.angular_displacement(self.distance, self.current_angle)
 
     def move(self, delta_time):
-        self.current_angle += (2*pi)*(delta_time/self.period)
+        if not self.is_static:
+            self.current_angle += (2*pi)*(delta_time/self.period)
 
     def __str__(self):
         #return str(self.current_angle)
         return str(self.orbital_position())
+
+    @property
+    def is_static(self):
+        if self.distance == 0 and self.period == 0:
+            return True
+        return False
