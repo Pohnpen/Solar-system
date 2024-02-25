@@ -34,6 +34,7 @@ class Planetoid():
     def __str__(self):
         return f"{self.name} is at {self.position}"
 
+
 if __name__ == "__main__":
     sun = Planetoid(500, 100, "Sun")
     earth = Planetoid(5, 1, "Earth", Orbit(Vector(0, 0), 1, 1))

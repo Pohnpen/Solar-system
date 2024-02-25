@@ -36,6 +36,7 @@ mars = Planetoid(4, 0.107, "Mars", Orbit(Vector(CENTER[0],CENTER[1]), distance=1
 phobos = Planetoid(2, 0.0005, "Phobos", Orbit(mars.position, distance=20, period=0.32/365))
 deimos = Planetoid(2, 0.00025, "Deimos", Orbit(mars.position, distance=30, period=1.26/365))
 
+solar_system = []
 
 # Main loop
 running = True
@@ -55,6 +56,10 @@ while running:
     text_surface = font.render(f"Solar System Viewer", True, text_color)
     text_rect = text_surface.get_rect(center=(CENTER[0], 50))
     screen.blit(text_surface, text_rect)
+
+    #
+    # Move and Draw the solar System
+    #
 
     # Static Sun
     pygame.draw.circle(screen, YELLOW, CENTER, 50)
