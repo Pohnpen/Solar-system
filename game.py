@@ -84,12 +84,19 @@ while running:
     # Draw the background image
     screen.blit(background_image, (0, 0))
 
+    #
+    # Info Text
+    #
     text_surface = font.render(f"Solar System Viewer", True, text_color)
     text_rect = text_surface.get_rect(center=(CENTER[0], 50))
     screen.blit(text_surface, text_rect)
 
-    text_surface = font.render(f"Earth Years: {earth_hours_passed/EARTH_HOURS_PER_EARTH_YEAR:.5f}", True, text_color)
+    text_surface = font.render(f"Sim Speed: {current_simulation_speed / EARTH_HOURS_PER_EARTH_YEAR:.5f} Earth Years", True, text_color)
     text_rect = text_surface.get_rect(center=(100, 100))
+    screen.blit(text_surface, text_rect)
+
+    text_surface = font.render(f"Earth Years: {earth_hours_passed/EARTH_HOURS_PER_EARTH_YEAR:.5f}", True, text_color)
+    text_rect = text_surface.get_rect(center=(100, 120))
     screen.blit(text_surface, text_rect)
 
     #
